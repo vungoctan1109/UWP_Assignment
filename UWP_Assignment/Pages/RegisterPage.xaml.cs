@@ -127,7 +127,7 @@ namespace UWP_Assignment.Pages
             {
                 errorMessage.Add("genderError", "Gender is required.");
             }
-            if (DateTime.Compare(Convert.ToDateTime(account.birthday), DateTime.Now) >= 0 || account.birthday.Equals("1601-01-01"))
+            if (DateTime.Compare(Convert.ToDateTime(account.birthday), DateTime.Now) > 0 || account.birthday.Equals("1601-01-01") || account.birthday.Equals((DateTime.Now).ToString("yyyy-MM-dd")))
             {
                 errorMessage.Add("birthdayError", "Invalid birthday.");
             }
