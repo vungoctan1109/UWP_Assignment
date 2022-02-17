@@ -83,7 +83,9 @@ namespace UWP_Assignment.Service
             Debug.WriteLine(jsonString);
             using (HttpClient httpClient = new HttpClient())
             {
-                httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {App.currentCredential.access_token}");
+                accountService = new AccountService();
+                Credential token = await accountService.LoadToken();
+                httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {token.access_token}");
                 HttpContent contentToSend = new StringContent(jsonString, Encoding.UTF8, ApiConfig.MediaType);
                 var result = await httpClient.PostAsync($"{ApiConfig.ApiDomain}{ApiConfig.MineListPath}", contentToSend);
                 if (result.StatusCode == System.Net.HttpStatusCode.Created)
